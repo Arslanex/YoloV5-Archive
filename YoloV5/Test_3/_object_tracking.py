@@ -114,5 +114,7 @@ plot_rectangles(img, results)
 img = screen_lines(img)
 
 cv.imshow('YOLOv5 Detection', img)
+cv.imwrite("RESULT_2.png", img)
+
 cv.waitKey(0)
 cv.destroyAllWindows()

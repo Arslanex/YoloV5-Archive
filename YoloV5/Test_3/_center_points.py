@@ -23,18 +23,17 @@ def plot_rectangles(frame, results):
 
     for i in range(n):
         row = cord[i]
-        print(row)
-        if row[4] >= 0.7:
+        if row[4] >= 0.1:
             x1, y1, x2, y2 = int(row[0] * x_shape), int(row[1] * y_shape), \
                              int(row[2] * x_shape), int(row[3] * y_shape)
 
         target_rectangle(x1,y1,x2,y2,frame)
         x,y = center_point(x1,y1,x2,y2,frame)
-        print("Center X ::",x, "\nCenter Y ::",y)
+        print("\nCenter X ::",x, "\nCenter Y ::",y)
 
 
 pic = cv.imread("test_image_1.jpeg")
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s', force_reload=True)
 classes = model.names
 device = 'cuda'
 
@@ -47,5 +46,7 @@ results = model(img)
 plot_rectangles(pic, results)
 
 cv.imshow('YOLOv5 Detection', pic)
+cv.imwrite("RESULT_1.png", pic)
+
 cv.waitKey(0)
 cv.destroyAllWindows()
